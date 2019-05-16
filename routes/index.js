@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+
+const router = express.Router();
 const db = require('../database/db');
 
-router.get('/', async function(req, res, next) {
+router.get('/', async (req, res) => {
   try {
     const data = await db.select('*').from('laptops');
     res.send(data);
