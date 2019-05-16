@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 6rem 4rem 10rem;
+    line-height: 1.7;
+    font-family: "Nunito Sans", sans-serif;
+    color: #555;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #67b26f, #4ca2cd);
+}
