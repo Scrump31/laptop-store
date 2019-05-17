@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LaptopList from './LaptopList';
-
+import LaptopDetail from './LaptopDetail';
 class App extends Component {
-  state = { laptops: [] };
+  state = { laptops: [], details: {} };
 
   componentDidMount() {
     try {
@@ -14,30 +15,36 @@ class App extends Component {
     }
   }
 
+  getDetails = laptop => this.setState({ details: laptop });
+
   render() {
+    if (this.state.laptops.length < 1) {
+      return <h1>Loading...</h1>;
+    }
     return (
-      <div>
+      <Router>
         <h1>The Laptop Store!</h1>
         <div className="container">
-          <div className="cards-container">
-            {this.state.laptops.map(
-              ({ id, productname, image, cpu, screen, price }) => {
-                return (
-                  <LaptopList
-                    key={id}
-                    id={id}
-                    productname={productname}
-                    image={image}
-                    cpu={cpu}
-                    screen={screen}
-                    price={price}
-                  />
-                );
-              },
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <LaptopList
+                {...props}
+                laptops={this.state.laptops}
+                getDetails={this.getDetails}
+              />
             )}
-          </div>
+          />
+
+          <Route
+            path="/detail"
+            render={props => (
+              <LaptopDetail {...props} details={this.state.details} />
+            )}
+          />
         </div>
-      </div>
+      </Router>
     );
   }
 }
