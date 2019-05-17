@@ -4,8 +4,7 @@ import './Laptop.css';
 
 const Laptop = ({ productinfo, getDetails }) => {
   const { image, productname, screen, price, cpu } = productinfo;
-  const joinURL = title => title.split(' ').join('-');
-  const handleGetDetails = () => getDetails(productinfo);
+  const handleGetDetails = () => getDetails(productname);
 
   return (
     <div>
@@ -30,7 +29,7 @@ const Laptop = ({ productinfo, getDetails }) => {
           <p className="card__price">${price}</p>
           <Link
             onClick={handleGetDetails}
-            to={`/detail/${joinURL(productname)}`}
+            to={`/detail/${productname}`}
             className="card__link"
           >
             Check it out{' '}

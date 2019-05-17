@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LaptopList from './LaptopList';
 import LaptopDetail from './LaptopDetail';
 class App extends Component {
-  state = { laptops: [], details: {} };
+  state = { laptops: [], details: [] };
 
   componentDidMount() {
     try {
@@ -15,7 +15,12 @@ class App extends Component {
     }
   }
 
-  getDetails = laptop => this.setState({ details: laptop });
+  getDetails = laptopName => {
+    this.setState(({ laptops }) => ({
+      details: laptops.filter(laptop => laptop.productname === laptopName)
+    }));
+  };
+  
 
   render() {
     if (this.state.laptops.length < 1) {
@@ -40,7 +45,7 @@ class App extends Component {
           <Route
             path="/detail"
             render={props => (
-              <LaptopDetail {...props} details={this.state.details} />
+              <LaptopDetail {...props} details={this.state.details} getDetails={this.getDetails} />
             )}
           />
         </div>
