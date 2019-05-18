@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "heroku-postbuild": "cd frontend && yarn && yarn run build",
     "commit": "git-cz"
   },
   "dependencies": {
