@@ -17,19 +17,19 @@ class App extends Component {
 
   getDetails = laptopName => {
     this.setState(({ laptops }) => ({
-      details: laptops.filter(laptop => laptop.productname === laptopName)
+      details: laptops.filter(laptop => laptop.productname === laptopName),
     }));
   };
-  
 
   render() {
     if (this.state.laptops.length < 1) {
       return <h1>Loading...</h1>;
     }
+
     return (
       <Router>
-        <h1>The Laptop Store!</h1>
         <div className="container">
+          <h1>The Laptop Store!</h1>
           <Route
             exact
             path="/"
@@ -41,11 +41,10 @@ class App extends Component {
               />
             )}
           />
-
           <Route
-            path="/detail"
+            path="/detail/:productname"
             render={props => (
-              <LaptopDetail {...props} details={this.state.details} getDetails={this.getDetails} />
+              <LaptopDetail {...props} details={this.state.details} />
             )}
           />
         </div>
